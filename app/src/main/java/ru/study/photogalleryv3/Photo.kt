@@ -2,7 +2,7 @@ package ru.study.photogalleryv3
 
 import com.google.gson.annotations.SerializedName
 
-data class Photo(
+class Photo(
         @SerializedName("id")
         val id: String,
         @SerializedName("title")
