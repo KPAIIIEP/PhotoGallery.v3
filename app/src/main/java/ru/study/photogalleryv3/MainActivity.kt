@@ -2,32 +2,31 @@ package ru.study.photogalleryv3
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import ru.study.photogalleryv3.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
     lateinit var photoAdapter: PhotoAdapter
     lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val linearLayoutManager = LinearLayoutManager(this)
         photoAdapter = PhotoAdapter(mutableListOf())
-        recyclerView = findViewById<RecyclerView>(R.id.recycler_view).apply {
+        recyclerView = binding.recyclerView.apply {
             layoutManager = linearLayoutManager
             adapter = photoAdapter
         }
 
-        findViewById<Button>(R.id.button).apply {
-            setOnClickListener {
-                update()
-            }
-        }
+        binding.button.setOnClickListener { update() }
 
         update()
     }
