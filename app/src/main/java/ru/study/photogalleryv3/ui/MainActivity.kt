@@ -1,4 +1,4 @@
-package ru.study.photogalleryv3
+package ru.study.photogalleryv3.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,13 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import ru.study.photogalleryv3.FlickrApi
 import ru.study.photogalleryv3.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    lateinit var photoAdapter: PhotoAdapter
-    lateinit var recyclerView: RecyclerView
+    private lateinit var photoAdapter: PhotoAdapter
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

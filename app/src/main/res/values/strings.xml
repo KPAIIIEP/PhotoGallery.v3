@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PhotoGalleryV3</string>
+    <string name="update">Update</string>
 </resources>

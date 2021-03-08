@@ -1,10 +1,11 @@
-package ru.study.photogalleryv3
+package ru.study.photogalleryv3.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ru.study.photogalleryv3.databinding.ItemViewBinding
+import ru.study.photogalleryv3.model.Photo
 
 class PhotoAdapter(var photos: List<Photo>) : RecyclerView.Adapter<PhotoAdapter.PhotoHolder>() {
 

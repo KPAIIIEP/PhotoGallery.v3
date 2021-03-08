@@ -1,4 +1,4 @@
-package ru.study.photogalleryv3
+package ru.study.photogalleryv3.model
 
 import com.google.gson.annotations.SerializedName
 
