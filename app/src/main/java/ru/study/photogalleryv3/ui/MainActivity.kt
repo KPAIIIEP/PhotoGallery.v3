@@ -6,17 +6,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import ru.study.photogalleryv3.FlickrApi
+import ru.study.photogalleryv3.App
+import ru.study.photogalleryv3.network.FlickrApi
 import ru.study.photogalleryv3.databinding.ActivityMainBinding
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var photoAdapter: PhotoAdapter
     private lateinit var recyclerView: RecyclerView
+    @Inject
+    lateinit var flickrApi: FlickrApi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        (application as App).appComponent.inject(this)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -33,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun update() {
-        FlickrApi.flickrApi.getPhotos()
+        flickrApi.getPhotos()
                 .map { result -> result?.let { it.response.photos } }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
