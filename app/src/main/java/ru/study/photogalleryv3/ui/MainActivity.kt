@@ -1,45 +1,16 @@
 package ru.study.photogalleryv3.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import ru.study.photogalleryv3.FlickrApi
-import ru.study.photogalleryv3.databinding.ActivityMainBinding
+import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var photoAdapter: PhotoAdapter
-    private lateinit var recyclerView: RecyclerView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        val linearLayoutManager = LinearLayoutManager(this)
-        photoAdapter = PhotoAdapter(mutableListOf())
-        recyclerView = binding.recyclerView.apply {
-            layoutManager = linearLayoutManager
-            adapter = photoAdapter
+        setContent {
+            MainScreen()
         }
-
-        binding.button.setOnClickListener { update() }
-
-        update()
-    }
-
-    private fun update() {
-        FlickrApi.flickrApi.getPhotos()
-                .map { result -> result?.let { it.response.photos } }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { photos ->
-                    photoAdapter.photos = photos
-                    recyclerView.adapter?.notifyDataSetChanged()
-                }
     }
 }
