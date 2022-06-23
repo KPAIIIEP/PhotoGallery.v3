@@ -1,1 +1,1 @@
-Модификация фотогалереи (ветка master - RxJava2, View Binding, ветка dagger2 - внедрение DI через Dagger2, ветка compose - модификация UI с помощью Jetpack Compose)
+Модификация фотогалереи (ветка master - RxJava2, View Binding, ветка dagger2 - внедрение DI через Dagger2, ветка compose - модификация UI с помощью Jetpack Compose, ветка uistate - uзменение UI с помощью StateFlow)
