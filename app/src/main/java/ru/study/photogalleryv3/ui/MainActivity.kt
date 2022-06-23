@@ -10,15 +10,18 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import ru.study.photogalleryv3.databinding.ActivityMainBinding
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    @Inject lateinit var photoAdapter: PhotoAdapter
     private lateinit var binding: ActivityMainBinding
-    private lateinit var photoAdapter: PhotoAdapter
     private lateinit var recyclerView: RecyclerView
     private val viewModel: PhotosViewModel by viewModels()
 
@@ -28,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val linearLayoutManager = LinearLayoutManager(this)
-        photoAdapter = PhotoAdapter()
         recyclerView = binding.recyclerView.apply {
             layoutManager = linearLayoutManager
             adapter = photoAdapter

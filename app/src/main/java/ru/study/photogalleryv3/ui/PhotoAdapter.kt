@@ -3,12 +3,14 @@ package ru.study.photogalleryv3.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import ru.study.photogalleryv3.databinding.ItemViewBinding
+import ru.study.photogalleryv3.di.PicassoService
 import ru.study.photogalleryv3.model.Photo
+import javax.inject.Inject
 
-class PhotoAdapter : RecyclerView.Adapter<PhotoAdapter.PhotoHolder>() {
+class PhotoAdapter @Inject constructor() : RecyclerView.Adapter<PhotoAdapter.PhotoHolder>() {
 
+    @Inject lateinit var picassoService: PicassoService
     private lateinit var binding: ItemViewBinding
     private val photos: MutableList<Photo> = mutableListOf()
 
@@ -31,13 +33,10 @@ class PhotoAdapter : RecyclerView.Adapter<PhotoAdapter.PhotoHolder>() {
         return photos.size
     }
 
-    class PhotoHolder(private val binding: ItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class PhotoHolder constructor(private val binding: ItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(photo: Photo) {
-            Picasso.get()
-                .load(photo.url)
-                .placeholder(android.R.drawable.ic_menu_gallery)
-                .into(binding.imageView)
+            picassoService.loadImage(photo.url, binding.imageView)
             binding.textView.text = photo.caption
         }
     }
