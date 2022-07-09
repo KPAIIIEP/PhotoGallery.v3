@@ -2,6 +2,7 @@ package ru.study.photogalleryv3.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -17,13 +18,13 @@ import ru.study.photogalleryv3.API_KEY
 import ru.study.photogalleryv3.FlickrApi
 import ru.study.photogalleryv3.model.FlickrPhotosResponse
 import java.io.IOException
+import javax.inject.Inject
 
-class PhotosViewModel : ViewModel() {
+@HiltViewModel
+class PhotosViewModel @Inject constructor(private val flickrApi: FlickrApi) : ViewModel() {
 
     private val _uiState = MutableStateFlow(PhotosUiState())
     val uiState: StateFlow<PhotosUiState> = _uiState.asStateFlow()
-
-    private val flickrApi = FlickrApi.flickrApi
 
     private var fetchJob: Job? = null
 
